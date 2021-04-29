@@ -24,7 +24,7 @@ def send_data():
     gender=request.form['gender']
     gender_hash=hashlib.md5(gender.encode()).hexdigest()
 
-    host=request.headers['Host']
+    host=request.headers['Referer']
 
     return redirect(host)
 
