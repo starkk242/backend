@@ -2,6 +2,7 @@ from flask import Flask, render_template,request,redirect
 import hashlib
 import codecs
 import rsa
+from db_connect import connect
 
 app = Flask(__name__)
 
@@ -11,6 +12,7 @@ def home():
 
 @app.route("/send_data",methods=['POST'])
 def send_data():
+    mycursor=connect()
     first_name=request.form['fname']
     fname_hash=codecs.encode(first_name,'rot13')
 
