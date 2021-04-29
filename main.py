@@ -26,7 +26,7 @@ def send_data():
 
     host=request.headers['Referer']
 
-    return redirect(host)
+    return redirect('http://'+host)
 
 
 
