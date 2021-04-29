@@ -26,7 +26,7 @@ def send_data():
 
     host=request.headers['Host']
 
-    return flask.redirect(host)
+    return redirect(host)
 
 
 
