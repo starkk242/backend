@@ -24,7 +24,7 @@ def send_data():
     gender=request.form['gender']
     gender_hash=hashlib.md5(gender.encode()).hexdigest()
 
-    return "%s  %s  %s  %s  %s".format(fname_hash,lname_hash,email_hash,paswd_hash,gender_hash)
+    return "%s  %s  %s  %s  %s"%(fname_hash,lname_hash,email_hash,paswd_hash,gender_hash)
 
 
 
