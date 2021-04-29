@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, render_template,request
+import hashlib
 
 app = Flask(__name__)
 
