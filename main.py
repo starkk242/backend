@@ -24,7 +24,9 @@ def send_data():
     gender=request.form['gender']
     gender_hash=hashlib.md5(gender.encode()).hexdigest()
 
-    return "Data Converted"
+    host=request.headers['Host']
+
+    return flask.redirect(host)
 
 
 
