@@ -4,9 +4,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello, World!"
+    return render_template('landing.html')
 
-@app.route("/send_data",,methods=['POST'])
+@app.route("/send_data",methods=['POST'])
 def send_data():
     first_name=request.form['fname']
     fname_hash=hashlib.md5(first_name.encode()).hexdigest()
