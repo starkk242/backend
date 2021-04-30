@@ -28,8 +28,12 @@ def send_data():
     gender=request.form['gender']
     gender_hash=codecs.encode(gender,'rot13')
 
-    host=request.headers['Referer']
+    sql="INSERT INTO customers (fname,lname,email,password,gender) values (%s,%s,%s,%s,%s)"
+    val=(fname_hash,lname_hash,email_hash,paswd_hash,gender_hash)
+    mycursor.execute(sql,val)
+    mydb.commit()
 
+    host=request.headers['Referer']
     return redirect(host)
 
 if __name__ == "__main__":
