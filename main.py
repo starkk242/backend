@@ -12,7 +12,8 @@ def home():
 
 @app.route("/send_data",methods=['POST'])
 def send_data():
-    mycursor=connect()
+    mydb=connect()
+    mycursor=mydb.cursor()
     first_name=request.form['fname']
     fname_hash=codecs.encode(first_name,'rot13')
 

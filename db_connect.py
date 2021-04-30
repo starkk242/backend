@@ -7,6 +7,4 @@ def connect():
         password="Bimal@24625",
         database="users"
         ) 
-
-    mycursor=mydb.cursor()
-    return mycursor
+    return mydb
