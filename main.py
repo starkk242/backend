@@ -35,7 +35,7 @@ def send_data():
     mydb.commit()
 
     host=request.headers['Referer']
-    return redirect(host+"/login")
+    return redirect(host+"login_page")
 
 @app.route('/auth',methods=["POST"])
 def auth():
