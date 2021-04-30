@@ -37,7 +37,7 @@ def send_data():
     host=request.headers['Referer']
     return redirect(host+"/login")
 
-@app.route('/auth',method=["POST"])
+@app.route('/auth',methods=["POST"])
 def auth():
     mydb=connect()
     mycursor=mydb.cursor()
