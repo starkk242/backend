@@ -1,7 +1,6 @@
 from flask import Flask, render_template,request,redirect
 import hashlib
-import codecs
-import rsa
+from flask.wrappers import Response
 from db_connect import connect
 
 app = Flask(__name__)
@@ -14,42 +13,32 @@ def home():
 def send_data():
     mydb=connect()
     mycursor=mydb.cursor()
-    first_name=request.form['fname']
-    fname_hash=codecs.encode(first_name,'rot13')
 
-    last_name=request.form['lname']
-    lname_hash=codecs.encode(last_name,'rot13')
-
+    phone_number=request.form['phone_number']
+    name=request.form['name']
     email=request.form['email']
-    email_hash=codecs.encode(email,'rot13')
-
     password=request.form['password']
     paswd_hash = hashlib.md5(password.encode()).hexdigest()
 
-    gender=request.form['gender']
-    gender_hash=codecs.encode(gender,'rot13')
-
-    sql="INSERT INTO customers (fname,lname,email,password,gender) values (%s,%s,%s,%s,%s)"
-    val=(fname_hash,lname_hash,email_hash,paswd_hash,gender_hash)
+    sql="INSERT INTO customers (phone_number,name,email,password) values (%s,%s,%s,%s)"
+    val=(phone_number,name,email,paswd_hash)
     mycursor.execute(sql,val)
     mydb.commit()
 
-    host=request.headers['Referer']
-    return redirect(host+"login_page")
+    return Response("Registration Complete")
 
 @app.route('/auth',methods=["POST"])
 def auth():
     mydb=connect()
     mycursor=mydb.cursor()
 
-    email=request.form['email']
-    email_hash=codecs.encode(email,'rot13')
+    phone_number=request.form['phone_number']
 
     password=request.form['password']
     paswd_hash = hashlib.md5(password.encode()).hexdigest()
 
-    sql='SELECT password from customers where email = %s'
-    val=(email_hash,)
+    sql='SELECT password from customers where phone_number = %s'
+    val=(phone_number,)
     mycursor.execute(sql,val)
     f=mycursor.fetchall()
 
